@@ -1,0 +1,21 @@
+#main{
+  padding-top: 80px;
+}
+
+.text{
+  max-width:50%;
+}
+.redtext {
+  color:#b30000;
+
+}
+.italic{
+  max-width:760px;
+  font-style:italic;
+}
+.col-md-11{
+  max-width:760px;
+}
+td:hover{
+  cursor:move;
+  }
