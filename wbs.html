@@ -32,7 +32,7 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      $.get("http://137.132.165.53/pmgame/wbsorder", function (data) {
+      $.get("http://137.132.165.53:8000/wbsorder", function (data) {
         var table = document.getElementById('wbsTableBody');
         shuffle(data).forEach(element => {
           console.log(element["wbs_name"]);
@@ -173,12 +173,43 @@
               });
             });
 
-            // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
-            var myObj = {
-              "wbs": myRows
-            };
-            console.log(myObj);
-            //  location.href = "wbsanswer.html"
+            let wbsOrder = [];
+            for (i = 0; i < myRows.length; i++) {
+              wbsOrder.push({
+                order: i,
+                name: myRows[i]
+              })
+            }
+
+            console.log(wbsOrder);
+            jQuery.ajax({
+              url: "http://137.132.165.53:8000/checkWbs",
+              type: "POST",
+              data: JSON.stringify({ 'wbs': wbsOrder }),
+              dataType: "json",
+              contentType: "application/json; charset=utf-8",
+              success: function (result) {
+                console.log(result.Result);
+                if (result.Result != 0) {
+                  return swal({
+                    title: "Error!",
+                    text: "WBS Order is Incorrect!",
+                    icon: "error",
+                    button: "Try again!",
+                  });
+                }
+                return  swal({
+                    title: "Success!",
+                    text: "WBS Order is Correct!",
+                    icon: "success",
+                    button: "Next!",
+                  }).then(() => { location.href = "wbsanswer.html" });
+              }
+            });
+            // $.post("http://137.132.165.53:8000/checkWbs", { 'wbs': wbsOrder }).done(function (data) {
+            //   console.log(data);
+            //   // swal("Success!", "WBS Order is correct!").then(() => { location.href = "wbsanswer.html" });
+            // });
           }
 
           function shuffle(array) {
@@ -211,6 +242,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
 
