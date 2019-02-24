@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Management</title>
+  <link rel="icon" type="image/ico" href="../../Project Management /favicon.ico" />
+  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="../clear-sans.css" />
+  <link rel="stylesheet" type="text/css" href="./schnetwork.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <header>
+      <img src=../manageycopy.png alt="managey logo" class="logo">
+      <ul class="nav">
+        <!-- <img src=manageycopy.png alt="managey logo" class="logo"> -->
+        <li><a href="#">Planning</a></li>
+        <li><a href="#">Monitoring</a></li>
+      </ul>
+    </header>
+
+    <p class="breadcrumbs">Planning > Project Schedule Management</p>
+
+    <section>
+      <div class="container-main">
+        <h1>Project Schedule Management</h1>
+
+        <img class="icon" src="../importance.png" width="50px" height="50px">
+        <div class="container-info">
+          <p class="text-header">Importance</p>
+          <div class="text-info">Project Schedule Management defines policies, procedures and documentation
+            for managing and controlling project schedule. These policies help to ensure timely completion of the
+            project.</div>
+        </div>
+
+        <img class="icon" src="../task.png" width="40px height=40px">
+        <div class="container-info">
+          <div class="text-header">
+            Tasks: <ul>
+              <li>Sequence Activities - Computing Project Schedule Network</li>
+              <li>Develop Schedule - Computing Critical Path</li>
+            </ul>
+
+          </div>
+          <p id="task-qn">Using the information provided, draw the Project Schedule Network and compute the critical
+            path on paper. Submit the answers by uploading a picture of the completed diagram.</p>
+        </div>
+
+        <img class="icon" src="../concept.png" width="35px height=35px">
+        <div class="container-info">
+          <div class="text-header">Project Schedule Network</div>
+          <div class="text-info">
+            <ul>
+              <li>A flowchart that graphically depicts the sequence, interdependencies, and start and finish times of
+                the project job plan of activities that is the critical path through the network</li>
+              <li>A project manager needs to know the interdependencies of the activities to decide which activities
+                need to be done first while which activities can be done together</li>
+            </ul>
+          </div>
+        </div>
+
+        <img class="icon" src="../concept.png" width="35px height=35px">
+        <div class="container-info">
+          <div class="text-header">Critical Path</div>
+          <div class="text-info">
+            <ul>
+              <li>The longest path through the activity network that allows for completion of all project related
+                activities</li>
+              <li>The shortest expected time in which the entire project can be completed</li>
+              <li>Delays on the critical path can delay completion of the entire project</li>
+            </ul>
+          </div>
+        </div>
+
+        <table id="schnetwork">
+          <tr>
+            <th>Activity</th>
+            <th>Description</th>
+            <th>Preceding Activity</th>
+            <th>Duration (Days)</th>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td>Market Research</td>
+            <td>-</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>E-Payment Concept</td>
+            <td>A</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Planning & Setting Product Features</td>
+            <td>B</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Wireframing</td>
+            <td>C</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Design Prototype</td>
+            <td>D</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>F</td>
+            <td>Usability Tests</td>
+            <td>E</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>G</td>
+            <td>Design Updates</td>
+            <td>F</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>H</td>
+            <td>Software Prototype</td>
+            <td>E</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>I</td>
+            <td>Database Setup</td>
+            <td>H</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>J</td>
+            <td>Import UI Design</td>
+            <td>G, I</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>K</td>
+            <td>Marketing Strategy</td>
+            <td>E</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>Establishing Prices</td>
+            <td>K</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>IT Development</td>
+            <td>J</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>N</td>
+            <td>Functional Tests</td>
+            <td>M</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>O</td>
+            <td>Final Preparations</td>
+            <td>N</td>
+            <td>10</td>
+          </tr>
+
+        </table>
+
+
+
+      </div>
+    </section>
+    <form id="form" action="/upload" enctype="multipart/form-data">
+      <div class="file-upload">
+        <div class="image-upload-wrap">
+          <input class="file-upload-input" type='file' name="submission" onchange="readURL(this);" accept="image/*" />
+          <div class="drag-text">
+            <h3>Drag and drop a file or click to upload your answer</h3>
+          </div>
+        </div>
+        <div class="file-upload-content">
+          <img id="#answer-image" class="file-upload-image" src="#" alt="your image" />
+          <div class="image-title-wrap">
+            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                class="image-title">Uploaded
+                Image</span></button>
+          </div>
+        </div>
+      </div>
+      <button class="container-cta" onclick="schnetworkNextButton()">
+        Next
+      </button>
+    </form>
+
+    <script>
+
+      $("#form").submit(function (e) {
+        return false;
+      });
+
+      function schnetworkNextButton() {
+
+        var formData = new FormData($("form").get(0));
+        console.log(formData)
+        $.ajax({
+          type: "POST",
+          url: "http://137.132.165.53:8000/upload",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (r) {
+            console.log("result", r)
+            return swal({
+              title: "Answer Uploaded!",
+              text: "The facilitator will be notified of your answer and get back to you!",
+              icon: "success",
+              button: "Great!",
+            }).then(() => { location.href = "../monitoring/crashing.html" });
+
+          },
+          error: function (e) {
+            console.log("some error", e);
+          }
+        });
+        // location.href = "../monitoring/crashing.html"
+      }
+
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('.image-upload-wrap').hide();
+
+            $('.file-upload-image').attr('src', e.target.result);
+            $('.file-upload-content').show();
+
+            $('.image-title').html(input.files[0].name);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+
+        } else {
+          removeUpload();
+        }
+      }
+
+      function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+      }
+      $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+      });
+      $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+      });
+    </script>
+
+  </div>
+</body>
+
+</html>

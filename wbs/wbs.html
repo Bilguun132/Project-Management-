@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project Management</title>
+    <link rel="icon" type="image/ico" href="../../Project Management /favicon.ico" />
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../clear-sans.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header>
+            <img src=../manageycopy.png alt="managey logo" class="logo">
+            <ul class="nav">
+                <!-- <img src=manageycopy.png alt="managey logo" class="logo"> -->
+                <li>Planning</li>
+                <li>
+                    <div class="grey-header">Monitoring</div>
+                </li>
+            </ul>
+        </header>
+
+        <p class="breadcrumbs">Planning > Project Scope Management</p>
+
+        <section>
+            <div class="container-main">
+                <h1>Project Scope Management</h1>
+                <img class="icon" src="../importance.png" width="50px" height="50px">
+                <div class="container-info">
+                    <div class="text-header">Importance</div>
+                    <div class="text-info">The project manager would need to ensure the inclusion of all and only the
+                        work
+                        required to complete the project successfully.
+                        <br>
+                        Project Scope refers to the work that must be done in order to deliver a project.</div>
+                </div>
+
+                <img class="icon" src="../task.png" width="40px height=40px">
+                <div class="container-info">
+                    <div class="text-header">Task: Create a Work Breakdown Structure</div>
+                    <div class="text-info">After gathering requirements of the project, these are the essential
+                        activities you have to engage in this entire project. </div>
+                    <div id="task-qn">Now, click and drag the suitable activity the respective segments form a Work
+                        Breakdown Structure. </div>
+                </div>
+
+                <img class="icon" src="../concept.png" width="35px height=35px">
+                <div class="container-info">
+                    <div class="text-header">Work Breakdown Structure</div>
+                    <div class="text-info">
+                        <ul>
+                            <li>Visually defines the scope into manageable chunks that a project team can understand
+                            </li>
+                            <li>The Work Breakdown Structure is a crucial output in defining the project scope </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <table id="wbsTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>WBS Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="wbsTableBody">
+                        <tr>
+                            <td style="font-weight:bold">Planning</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Product Design</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Product Development</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Marketing</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold">Product Release</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <button class="container-cta" onclick="basicDecsriptionNextButton()">
+            Next
+        </button>
+
+        <script>
+            $(document).ready(function () {
+                $.get("http://137.132.165.53:8000/wbsorder", function (data) {
+                    var table = document.getElementById('wbsTableBody');
+                    shuffle(data).forEach(element => {
+                        console.log(element["wbs_name"]);
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = '<td>' + element["wbs_name"] + '</td>';
+                        table.append(tr);
+                    });
+                });
+            })
+            $('tbody').sortable();
+            function basicDecsriptionNextButton() {
+                var myRows = [];
+                var headersText = [];
+                var $headers = $("th");
+
+                // Loop through grabbing everything
+                var $rows = $("tbody tr").each(function (index) {
+                    $cells = $(this).find("td");
+
+                    $cells.each(function (cellIndex) {
+                        if ($(this).css('font-weight') == 'bold' || $(this).css('font-weight') == 700) return;
+                        //   myRows[index] = {};
+                        // Set the header text
+                        if (headersText[cellIndex] === undefined) {
+                            headersText[cellIndex] = $($headers[cellIndex]).text();
+                        }
+                        // Update the row object with the header/cell combo
+                        // myRows[index][headersText[cellIndex]] = $(this).text();
+                        myRows.push($(this).text());
+                    });
+                });
+
+                let wbsOrder = [];
+                for (i = 0; i < myRows.length; i++) {
+                    wbsOrder.push({
+                        order: i,
+                        name: myRows[i]
+                    })
+                }
+
+                console.log(wbsOrder);
+                jQuery.ajax({
+                    url: "http://137.132.165.53:8000/checkWbs",
+                    type: "POST",
+                    data: JSON.stringify({ 'wbs': wbsOrder }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        console.log(result.Result);
+                        if (result.Result != 0) {
+                            return swal({
+                                title: "Error!",
+                                text: "WBS Order is Incorrect!",
+                                icon: "error",
+                                button: "Try again!",
+                            });
+                        }
+                        return swal({
+                            title: "Success!",
+                            text: "WBS Order is Correct!",
+                            icon: "success",
+                            button: "Next!",
+                        }).then(() => { location.href = "wbsanswer.html" });
+                    }
+                });
+                // $.post("http://137.132.165.53:8000/checkWbs", { 'wbs': wbsOrder }).done(function (data) {
+                //   console.log(data);
+                //   // swal("Success!", "WBS Order is correct!").then(() => { location.href = "wbsanswer.html" });
+                // });
+            }
+
+            function shuffle(array) {
+                var currentIndex = array.length, temporaryValue, randomIndex;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                }
+
+                return array;
+            }
+
+        </script>
+
+    </div>
+</body>
+
+</html>
