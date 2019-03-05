@@ -217,6 +217,10 @@
           </div>
         </div>
       </div>
+      <p class="formwords"><strong>Critical Path Duration:
+          <input id="duration-answer" type="number" name="duration" size="4" maxlength="5" />
+          Days
+        </strong></p>
       <button class="container-cta" onclick="schnetworkNextButton()">
         Next
       </button>
@@ -231,6 +235,15 @@
       function schnetworkNextButton() {
 
         if ($(".image-upload-wrap").is(':visible') === false) {
+          console.log(($("#duration-answer").val()));
+          if (Number($("#duration-answer").val()) !== 10) {
+            return swal({
+              title: "Error!",
+              text: "Critical Path Duration Incorrect!",
+              icon: "error",
+              button: "Ok!",
+            })
+          }
           var formData = new FormData($("form").get(0));
           console.log(formData)
           $.ajax({
@@ -300,14 +313,6 @@
         $('.image-upload-wrap').removeClass('image-dropping');
       });
     </script>
-
-
-    <form action=>
-      <p class="formwords"><strong>Critical Path Duration:
-          <input type="number" name="duration" size="4" maxlength="5" />
-          Days
-        </strong></p>
-    </form>
 
   </div>
 </body>

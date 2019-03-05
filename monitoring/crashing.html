@@ -1,170 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Project Management</title>
-    <link rel="icon" type="image/ico" href="../../Project Management /favicon.ico"/>
+    <link rel="icon" type="image/ico" href="../../Project Management /favicon.ico" />
     <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../clear-sans.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
+
 <body>
     <div class="container-fluid">
         <header>
             <img src=../manageycopy.png alt="managey logo" class="logo">
             <ul class="nav">
                 <!-- <img src=manageycopy.png alt="managey logo" class="logo"> -->
-                <li><div class="grey-header">Planning</div></li> 
+                <li>
+                    <div class="grey-header">Planning</div>
+                </li>
                 <li>Monitoring</li>
             </ul>
         </header>
-        
+
         <p class="breadcrumbs">Monitoring > Project Schedule Management</p>
 
         <section>
             <div class="container-main">
                 <h1>Project Schedule Management - Schedule Compression</h1>
-                
+
                 <img class="icon" src="../importance.png" width="50px" height="50px">
                 <div class="container-info">
-                    <div class="text-header">Importance</div>   
-                    <div class="text-info">Schedule Compression shortens the project schedule without having to change the project scope, to meet schedule constraints, imposed dates or other schedule objectives.</div>
+                    <div class="text-header">Importance</div>
+                    <div class="text-info">Schedule Compression shortens the project schedule without having to change
+                        the project scope, to meet schedule constraints, imposed dates or other schedule objectives.
+                    </div>
                 </div>
 
                 <img class="icon" src="../task.png" width="40px height=40px">
                 <div class="container-info">
                     <div class="text-header">
-                        Tasks: Schedule Compressing - Using Crashing  
+                        Tasks: Schedule Compressing - Using Crashing
                     </div>
                     <div class="text-info">
-                        Based on what’s planned before, the software prototype (H) has to be done by Day 60. 
-                        However, on Day 55, the field report indicates that the developers are behind schedule by 5 days. 
-                    </div>  
+                        Based on what’s planned before, the software prototype (H) has to be done by Day 60.
+                        However, on Day 55, the field report indicates that the developers are behind schedule by 5
+                        days.
+                    </div>
 
-                    <p id="task-qn">In order to finish the project on time, you have to crash the project by 5 days. 
+                    <p id="task-qn">In order to finish the project on time, you have to crash the project by 5 days.
                         Given the information below, compute the project duration and costs upon crashing. </p>
                 </div>
 
                 <img class="icon" src="../concept.png" width="35px height=35px">
                 <div class="container-info">
-                    <div class="text-header">Crashing</div>   
+                    <div class="text-header">Crashing</div>
                     <div class="text-info">
                         A technique used to reduce the duration of a project for the least amount of extra cost
-                       <ul><li>Always crash an activity on the critical path</li>
-                           <li>Always crash by one day at a time</li>
-                        </ul> 
+                        <ul>
+                            <li>Always crash an activity on the critical path</li>
+                            <li>Always crash by one day at a time</li>
+                        </ul>
                     </div>
                 </div>
 
-                <img src="crashingcriticalpath copy.png", width ="650" height="400">
-        
-                    <table>
-                        <tr>
-                            <th colspan="6">Project Overhead Cost: $700/day</th>
-                        </tr>
-                        <tr>
-                            <th>Activity</th>
-                            <th>Predecessor</th>
-                            <th>Activity Duration (Days)</th>
-                            <th>Crash Duration (Days)</th>
-                            <th>Normal Cost of Activity</th>
-                            <th>Additional Cost/Day to Crash</th>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td>F</td>
-                            <td>7</td>
-                            <td>5</td>
-                            <td>1200</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td>I</td>
-                            <td>H</td>
-                            <td>15</td>
-                            <td>14</td>
-                            <td>2500</td>
-                            <td>800</td>
-                        </tr>
-                        <tr>
-                            <td>J</td>
-                            <td>G, I</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>1200</td>
-                            <td>600</td>
-                        </tr>
-                        <tr>
-                            <td>K</td>
-                            <td>E</td>
-                            <td>10</td>
-                            <td>8</td>
-                            <td>1500</td>
-                            <td>400</td>
-                        </tr>
-                        <tr>
-                            <td>L</td>
-                            <td>K</td>
-                            <td>10</td>
-                            <td>9</td>
-                            <td>1500</td>
-                            <td>400</td>
-                        </tr>
-                        <tr>
-                            <td>M</td>
-                            <td>J</td>
-                            <td>15</td>
-                            <td>13</td>
-                            <td>2000</td>
-                            <td>700</td>
-                        </tr>
-                        <tr>
-                            <td>N</td>
-                            <td>M</td>
-                            <td>15</td>
-                            <td>14</td>
-                            <td>1800</td>
-                            <td>600</td>
-                        </tr>
-                        <tr>
-                            <td>O</td>
-                            <td>N</td>
-                            <td>10</td>
-                            <td>10</td>
-                            <td>2800</td>
-                            <td>0</td>
-                        </tr>
-                </table>
-        
+                <img src="crashingcriticalpath copy.png" , width="650" height="400">
+
                 <table>
-                        <tbody>
+                    <tr>
+                        <th colspan="6">Project Overhead Cost: $700/day</th>
+                    </tr>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Predecessor</th>
+                        <th>Activity Duration (Days)</th>
+                        <th>Crash Duration (Days)</th>
+                        <th>Normal Cost of Activity</th>
+                        <th>Additional Cost/Day to Crash</th>
+                    </tr>
+                    <tr>
+                        <td>G</td>
+                        <td>F</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>1200</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>I</td>
+                        <td>H</td>
+                        <td>15</td>
+                        <td>14</td>
+                        <td>2500</td>
+                        <td>800</td>
+                    </tr>
+                    <tr>
+                        <td>J</td>
+                        <td>G, I</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>1200</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td>K</td>
+                        <td>E</td>
+                        <td>10</td>
+                        <td>8</td>
+                        <td>1500</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>K</td>
+                        <td>10</td>
+                        <td>9</td>
+                        <td>1500</td>
+                        <td>400</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>J</td>
+                        <td>15</td>
+                        <td>13</td>
+                        <td>2000</td>
+                        <td>700</td>
+                    </tr>
+                    <tr>
+                        <td>N</td>
+                        <td>M</td>
+                        <td>15</td>
+                        <td>14</td>
+                        <td>1800</td>
+                        <td>600</td>
+                    </tr>
+                    <tr>
+                        <td>O</td>
+                        <td>N</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>2800</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tbody>
                         <tr>
-                        <th>Project Duration</th>
-                        <td class="contentEditable" contenteditable='true'></td>
+                            <th>Project Duration (Days)</th>
+                            <td>
+                                <input id="project-duration" type="number" min="0"  /></td>
+                            </td>
                         </tr>
                         <tr>
-                        <th>Project Costs</th>
-                        <td class="contentEditable" contenteditable='true'></td>
+                            <th>Project Costs (S$)</th>
+                            <td>
+                                <input id="project-cost" type="number" min="0"  /></td>
+                            </td>
                         </tr>
-                        </tbody>
-                    </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <button class="container-cta" onclick= "crashingNextButton()">
-                Next
+        <button class="container-cta" onclick="crashingNextButton()">
+            Next
         </button>
-    
-    
+
+
         <script>
             function crashingNextButton() {
+                console.log($("#project-duration").val());
+                console.log($("#project-cost").val());
+                if (Number($("#project-duration").val()) !== 10 || Number($("#project-cost").val()) !== 100) {
+                    return swal({
+                        title: "Error!",
+                        text: "Project Duration or Cost Incorrect!",
+                        icon: "error",
+                        button: "Ok!",
+                    })
+                }
+                
                 location.href = "eva.html"
             }
         </script>
 
 
     </div>
-    </body>
-    </html>
+</body>
+
+</html>
