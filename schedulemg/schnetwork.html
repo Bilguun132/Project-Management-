@@ -52,9 +52,21 @@
             </ul>
 
           </div>
-          <p id="task-qn">Using the information provided, draw the Project Schedule Network and compute the critical
-            path on paper. Submit the answers by uploading a picture of the completed diagram.</p>
+
+          <div class="task-qn">
+            Using the information provided, draw the Project Schedule Network and compute the Critical Path on paper.
+            Submit the answers by uploading a picture of the completed diagram.
+          </div>
+          <br>
+
+          Critical Path Legend:
+          <img src="criticalpathlegend copy.png" width="110px" height="110px">
+          <br>
+
         </div>
+
+
+
 
         <img class="icon" src="../concept.png" width="35px height=35px">
         <div class="container-info">
@@ -67,7 +79,9 @@
                 need to be done first while which activities can be done together</li>
             </ul>
           </div>
+
         </div>
+
 
         <img class="icon" src="../concept.png" width="35px height=35px">
         <div class="container-info">
@@ -216,30 +230,42 @@
 
       function schnetworkNextButton() {
 
-        var formData = new FormData($("form").get(0));
-        console.log(formData)
-        $.ajax({
-          type: "POST",
-          url: "http://137.132.165.53:8000/upload",
-          data: formData,
-          processData: false,
-          contentType: false,
-          success: function (r) {
-            console.log("result", r)
-            return swal({
-              title: "Answer Uploaded!",
-              text: "The facilitator will be notified of your answer and get back to you!",
-              icon: "success",
-              button: "Great!",
-            }).then(() => { location.href = "../monitoring/crashing.html" });
+        if ($(".image-upload-wrap").is(':visible') === false) {
+          var formData = new FormData($("form").get(0));
+          console.log(formData)
+          $.ajax({
+            type: "POST",
+            url: "http://137.132.165.53:8000/upload",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (r) {
+              console.log("result", r)
+              return swal({
+                title: "Answer Uploaded!",
+                text: "The facilitator will be notified of your answer and get back to you!",
+                icon: "success",
+                button: "Great!",
+              }).then(() => { location.href = "../monitoring/crashing.html" });
 
-          },
-          error: function (e) {
-            console.log("some error", e);
-          }
-        });
-        // location.href = "../monitoring/crashing.html"
+            },
+            error: function (e) {
+              console.log("some error", e);
+            }
+          });
+          // location.href = "../monitoring/crashing.html"
+        }
+        else {
+          return swal({
+            title: "Error!",
+            text: "Please upload an image first!",
+            icon: "error",
+            button: "Ok!",
+          })
+        }
       }
+
+
 
       function readURL(input) {
         if (input.files && input.files[0]) {
@@ -274,6 +300,14 @@
         $('.image-upload-wrap').removeClass('image-dropping');
       });
     </script>
+
+
+    <form action=>
+      <p class="formwords"><strong>Critical Path Duration:
+          <input type="number" name="duration" size="4" maxlength="5" />
+          Days
+        </strong></p>
+    </form>
 
   </div>
 </body>

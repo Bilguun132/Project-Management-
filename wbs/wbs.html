@@ -65,6 +65,14 @@
                     </div>
                 </div>
 
+                <ul id="activities-list">
+                    <li>Planning: 3 Activities</li>
+                    <li>Product Design: 4 Activities</li>
+                    <li>Product Development: 4 Activities</li>
+                    <li>Marketing: 3 Activities</li>
+                    <li>Product Release: 2 Activities</li>
+                </ul>
+
                 <table id="wbsTable" class="table">
                     <thead>
                         <tr>
@@ -101,7 +109,8 @@
             $(document).ready(function () {
                 $.get("http://137.132.165.53:8000/wbsorder", function (data) {
                     var table = document.getElementById('wbsTableBody');
-                    shuffle(data).forEach(element => {
+                    //removing shuffle for now. add shuffle in front of (data) to shuffle
+                    (data).forEach(element => {
                         console.log(element["wbs_name"]);
                         var tr = document.createElement('tr');
                         tr.innerHTML = '<td>' + element["wbs_name"] + '</td>';
